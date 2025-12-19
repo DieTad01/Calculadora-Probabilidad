@@ -1,3 +1,4 @@
+document.addEventListener("DOMContentLoaded", () => {
 // =================== NAVEGACIÓN ===================
         document.querySelectorAll('.menu-item').forEach(item => {
             item.addEventListener('click', function() {
@@ -365,4 +366,6 @@
 
         // Inicializar parámetros de distribuciones continuas
         showContinuousParams();
+
         showDistributionParams();
+        });
