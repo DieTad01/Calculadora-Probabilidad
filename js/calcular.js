@@ -368,4 +368,17 @@ document.addEventListener("DOMContentLoaded", () => {
         showContinuousParams();
 
         showDistributionParams();
+        window.calculateDescriptive = calculateDescriptive;
+        window.clearDescriptive = clearDescriptive;
+        window.calculatePermComb = calculatePermComb;
+        window.calculateProbability = calculateProbability;
+        window.calculateDiscreteVar = calculateDiscreteVar;
+        window.showContinuousParams = showContinuousParams;
+        window.calculateContinuousVar = calculateContinuousVar;
+        window.showDistributionParams = showDistributionParams;
+        window.calculateDistribution = calculateDistribution;
+        window.calculateRegression = calculateRegression;
+        window.calculateSampleSize = calculateSampleSize;
+        window.calculateHypothesis = calculateHypothesis;
         });
+
