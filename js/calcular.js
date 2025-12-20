@@ -13,13 +13,14 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
 
-        // =================== FUNCIONES DE ESTADÍSTICA DESCRIPTIVA ===================
+        // =================== UTILIDADES ===================
         function parseData(input) {
             return input.split(',')
                 .map(x => parseFloat(x.trim()))
                 .filter(x => !isNaN(x));
         }
 
+        // =================== FUNCIONES DE ESTADÍSTICA DESCRIPTIVA ===================
         function calculateDescriptive() {
             const input = document.getElementById('dataInput').value;
             const data = parseData(input);
@@ -48,10 +49,14 @@ document.addEventListener("DOMContentLoaded", () => {
             const freq = {};
             data.forEach(x => freq[x] = (freq[x] || 0) + 1);
             const maxFreq = Math.max(...Object.values(freq));
-            const mode = Object.keys(freq).filter(x => freq[x] === maxFreq).join(', ');
+
+            // Cuando NO hay moda
+            const mode = maxFreq === 1
+            ? 'No hay moda'
+            : Object.keys(freq).filter(x => freq[x] === maxFreq).join(', ');
             
             // Varianza y desviación
-            const variance = data.reduce((sum, x) => sum + Math.pow(x - mean, 2), 0) / (n - 1);
+            const variance = data.reduce((s, x) => s + (x - mean) ** 2, 0) / (n - 1);
             const stdDev = Math.sqrt(variance);
             
             // Rango
@@ -113,8 +118,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const favorable = parseInt(document.getElementById('favorable').value);
             const total = parseInt(document.getElementById('totalCases').value);
             
-            if (isNaN(favorable) || isNaN(total) || favorable > total) {
-                alert('Casos favorables deben ser ≤ casos totales');
+            if (isNaN(f) || isNaN(t) || f > t || t <= 0) {
+                alert('Datos inválidos');
                 return;
             }
             
@@ -366,8 +371,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Inicializar parámetros de distribuciones continuas
         showContinuousParams();
-
         showDistributionParams();
+
         window.calculateDescriptive = calculateDescriptive;
         window.clearDescriptive = clearDescriptive;
         window.calculatePermComb = calculatePermComb;
@@ -380,5 +385,4 @@ document.addEventListener("DOMContentLoaded", () => {
         window.calculateRegression = calculateRegression;
         window.calculateSampleSize = calculateSampleSize;
         window.calculateHypothesis = calculateHypothesis;
-        });
-
+       }); 
